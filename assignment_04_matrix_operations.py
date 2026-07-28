@@ -59,4 +59,111 @@
 # =============================================================================
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
+def read_matrix():
+    rows = int(input("Enter number of rows: "))
+    cols = int(input("Enter number of columns: "))
 
+    matrix = []
+
+    for i in range(rows):
+        row = list(map(int, input(f"Enter row {i+1}: ").split()))
+        matrix.append(row)
+
+    return matrix
+
+
+def display_matrix(matrix):
+    for row in matrix:
+        for value in row:
+            print(value, end="\t")
+        print()
+
+
+def transpose_matrix(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+
+    transpose = []
+
+    for j in range(cols):
+        new_row = []
+
+        for i in range(rows):
+            new_row.append(matrix[i][j])
+
+        transpose.append(new_row)
+
+    return transpose
+
+
+def add_matrices(matrix1, matrix2):
+    result = []
+
+    rows = len(matrix1)
+    cols = len(matrix1[0])
+
+    for i in range(rows):
+        row = []
+
+        for j in range(cols):
+            row.append(matrix1[i][j] + matrix2[i][j])
+
+        result.append(row)
+
+    return result
+
+
+def multiply_matrices(matrix1, matrix2):
+    result = []
+
+    rows = len(matrix1)
+    cols = len(matrix2[0])
+    common = len(matrix2)
+
+    for i in range(rows):
+        row = []
+
+        for j in range(cols):
+            total = 0
+
+            for k in range(common):
+                total += matrix1[i][k] * matrix2[k][j]
+
+            row.append(total)
+
+        result.append(row)
+
+    return result
+
+
+
+# MAIN PROGRAM
+
+print("ENTER MATRIX FOR TRANSPOSE")
+matrix = read_matrix()
+
+print("\nOriginal Matrix:")
+display_matrix(matrix)
+
+print("\nTranspose:")
+display_matrix(transpose_matrix(matrix))
+
+
+print("\nENTER FIRST MATRIX FOR ADDITION")
+matrix1 = read_matrix()
+
+print("\nENTER SECOND MATRIX FOR ADDITION")
+matrix2 = read_matrix()
+
+print("\nAddition Result:")
+display_matrix(add_matrices(matrix1, matrix2))
+
+
+print("\nENTER MATRIX A FOR MULTIPLICATION")
+matrixA = read_matrix()
+
+print("\nENTER MATRIX B FOR MULTIPLICATION")
+matrixB = read_matrix()
+
+print("\nMultiplication Result:")
+display_matrix(multiply_matrices(matrixA, matrixB))
